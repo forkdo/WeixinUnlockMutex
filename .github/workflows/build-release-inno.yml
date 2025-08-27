@@ -1,0 +1,54 @@
+name: Build and Release with Inno Setup
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2025
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+      
+    - name: Install Inno Setup
+      run: |
+        # Download and install Inno Setup
+        Invoke-WebRequest -Uri "https://jrsoftware.org/download.php/is.exe" -OutFile "innosetup.exe"
+        Start-Process -FilePath "innosetup.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART" -Wait
+        # Add Inno Setup to PATH
+        $env:PATH += ";C:\Program Files (x86)\Inno Setup 6"
+        echo "C:\Program Files (x86)\Inno Setup 6" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      shell: powershell
+      
+    - name: Build x86 Release
+      run: |
+        msbuild WeChatPC.sln /p:Configuration=Release /p:Platform=x86 /p:OutputPath=..\Release\
+      working-directory: .
+      
+    - name: Create Installer with Inno Setup
+      run: |
+        # Compile Inno Setup script
+        iscc.exe WeChatPC.iss
+        # Rename output file to include version
+        Rename-Item "WeChatPC-Setup.exe" "WeChatPC-${{ github.ref_name }}.exe"
+      shell: powershell
+      
+    - name: Create Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          WeChatPC-${{ github.ref_name }}.exe
+          Release/WeChatPC.exe
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

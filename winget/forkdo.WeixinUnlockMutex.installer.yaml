@@ -1,0 +1,23 @@
+# Created with YamlCreate.ps1 v2.2.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.4.0.schema.json
+
+PackageIdentifier: forkdo.WeixinUnlockMutex
+PackageVersion: 1.0.0
+Platform:
+- Windows.Desktop
+MinimumOSVersion: 10.0.0.0
+InstallerType: msi
+Scope: machine
+InstallModes:
+- interactive
+- silent
+- silentWithProgress
+UpgradeBehavior: install
+ReleaseDate: 2024-01-01
+Installers:
+- Architecture: x86
+  InstallerUrl: https://github.com/forkdo/WeixinUnlockMutex/releases/latest/download/WeChatPC-v1.0.0.msi
+  InstallerSha256: PLACEHOLDER_SHA256
+  ProductCode: '{12345678-1234-1234-1234-123456789012}'
+ManifestType: installer
+ManifestVersion: 1.4.0

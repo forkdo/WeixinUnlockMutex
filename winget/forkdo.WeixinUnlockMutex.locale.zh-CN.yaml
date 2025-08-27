@@ -1,0 +1,36 @@
+# Created with YamlCreate.ps1 v2.2.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.locale.1.4.0.schema.json
+
+PackageIdentifier: forkdo.WeixinUnlockMutex
+PackageVersion: 1.0.0
+PackageLocale: zh-CN
+Publisher: forkdo
+PackageName: 微信多开工具
+ShortDescription: 微信多开解锁工具，支持同时运行多个微信实例
+Description: |-
+  WeChatPC 是一款专为微信PC版设计的多开工具，通过系统底层句柄操作技术，
+  绕过微信的单实例限制，实现多个微信账号同时登录。
+  
+  主要特征：
+  - 支持无限多开微信实例
+  - 一键启动，操作简单
+  - 使用Windows底层API进行句柄操作
+  - 安全可靠，无需第三方工具
+  - 便携免安装，单文件执行
+Tags:
+- 微信
+- 多开
+- 解锁
+- 工具
+- Windows
+ReleaseNotes: |-
+  - 初始发布版本，支持基本的微信互斥锁解锁功能
+  - 支持微信 4.0.6.21 版本
+  - 自动化MSI安装程序生成
+  - GitHub Actions CI/CD 集成
+InstallationNotes: |-
+  本工具仅供教育和技术研究使用。
+  安装前请确保微信未在运行。
+  需要 x86 (32位) 架构。
+ManifestType: locale
+ManifestVersion: 1.4.0

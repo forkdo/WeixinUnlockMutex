@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  
+  <Package Name="WeChatPC Unlock Mutex"
+           Manufacturer="WeixinUnlockMutex Contributors"
+           Version="1.0.0.0"
+           UpgradeCode="12345678-1234-1234-1234-123456789012"
+           Language="1033"
+           InstallerVersion="200"
+           Compressed="yes">
+
+    <!-- Media Definition -->
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- Feature Definition -->
+    <StandardDirectory Id="ProgramFilesFolder">
+      <Directory Id="INSTALLFOLDER" Name="WeChatPC Unlock Mutex" />
+    </StandardDirectory>
+    
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="ApplicationProgramsFolder" Name="WeChatPC Unlock Mutex"/>
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder" />
+    <!-- Components -->
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      
+      <!-- Main Executable -->
+      <Component>
+        <File Id="WeChatPCExe" Source="Release\WeChatPC.exe" />
+        <!-- Registry entries for uninstall -->
+        <RegistryValue Root="HKCU" 
+                       Key="Software\WeChatPC" 
+                       Name="installed" 
+                       Type="integer" 
+                       Value="1" />
+      </Component>
+
+      <!-- Start Menu Shortcut -->
+      <Component Directory="ApplicationProgramsFolder">
+        <Shortcut Name="WeChatPC Unlock Mutex"
+                  Target="[#WeChatPCExe]"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Description="Tool to unlock WeChat mutex for multiple instances" />
+        <RemoveFolder On="uninstall"/>
+        <RegistryValue Root="HKCU" 
+                       Key="Software\WeChatPC" 
+                       Name="StartMenu" 
+                       Type="integer" 
+                       Value="1" 
+                       KeyPath="yes"/>
+      </Component>
+
+      <!-- Desktop Shortcut (Optional) -->
+      <Component Directory="DesktopFolder">
+        <Shortcut Name="WeChatPC Unlock Mutex"
+                  Target="[#WeChatPCExe]"
+                  WorkingDirectory="INSTALLFOLDER"
+                  Description="Tool to unlock WeChat mutex for multiple instances" />
+        <RegistryValue Root="HKCU" 
+                       Key="Software\WeChatPC" 
+                       Name="DesktopShortcut" 
+                       Type="integer" 
+                       Value="1" 
+                       KeyPath="yes"/>
+      </Component>
+      
+    </ComponentGroup>
+
+    <!-- Feature Definition -->
+    <Feature Id="ProductFeature" Title="WeChatPC" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <!-- Upgrade Logic -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+  </Package>
+</Wix>

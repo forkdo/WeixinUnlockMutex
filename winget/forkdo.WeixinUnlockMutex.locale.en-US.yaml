@@ -1,0 +1,55 @@
+# Created with YamlCreate.ps1 v2.2.0
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.4.0.schema.json
+
+PackageIdentifier: forkdo.WeixinUnlockMutex
+PackageVersion: 1.0.0
+PackageLocale: en-US
+Publisher: forkdo
+PublisherUrl: https://github.com/forkdo
+PublisherSupportUrl: https://github.com/forkdo/WeixinUnlockMutex/issues
+Author: forkdo
+PackageName: WeChatPC Unlock Mutex
+PackageUrl: https://github.com/forkdo/WeixinUnlockMutex
+License: MIT
+LicenseUrl: https://github.com/forkdo/WeixinUnlockMutex/blob/main/LICENSE
+Copyright: Copyright (c) 2024 forkdo
+CopyrightUrl: https://github.com/forkdo/WeixinUnlockMutex/blob/main/LICENSE
+ShortDescription: Tool to unlock WeChat mutex for multiple instances
+Description: |-
+  WeChatPC is a technical research tool designed to enable multiple instances of the WeChat PC client 
+  to run simultaneously by bypassing the built-in single-instance restriction. It leverages Windows 
+  system-level handle manipulation to achieve this.
+  
+  Features:
+  - Supports unlimited multi-opening of WeChat
+  - One-click launch of WeChat instances  
+  - Uses advanced Windows API handle operations
+  - Safe and reliable, no third-party tools required
+  - Portable single-file execution
+Moniker: wechat-unlock
+Tags:
+- wechat
+- multi-instance
+- mutex
+- windows
+- tool
+- unlock
+- handle-manipulation
+ReleaseNotes: |-
+  - Initial release with basic WeChat mutex unlocking functionality
+  - Supports WeChat version 4.0.6.21
+  - Automated MSI installer generation
+  - GitHub Actions CI/CD integration
+ReleaseNotesUrl: https://github.com/forkdo/WeixinUnlockMutex/releases/latest
+PurchaseUrl: https://github.com/forkdo/WeixinUnlockMutex
+InstallationNotes: |-
+  This tool is for educational and research purposes only. 
+  Please ensure WeChat is not running before installation.
+  Requires x86 (32-bit) architecture.
+Documentations:
+- DocumentLabel: README
+  DocumentUrl: https://github.com/forkdo/WeixinUnlockMutex/blob/main/README.md
+- DocumentLabel: CI/CD Documentation  
+  DocumentUrl: https://github.com/forkdo/WeixinUnlockMutex/blob/main/CI-CD-README.md
+ManifestType: defaultLocale
+ManifestVersion: 1.4.0
